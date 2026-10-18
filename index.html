@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="format-detection" content="telephone=no">
+<meta name="robots" content="noindex,nofollow">
+<title>LA-154 导入 sing-box</title>
+<style>
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  background:#0e1526;
+  color:#e8edf7;
+  font:17px/1.5 -apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;
+  padding:28px 18px 40px;
+}
+.wrap{max-width:440px;margin:0 auto}
+.badge{display:inline-block;color:#9eb6ff;background:#1a2744;border:1px solid #314572;border-radius:999px;padding:4px 10px;font-size:13px}
+h1{margin:14px 0 0;font-size:34px;letter-spacing:.02em}
+.host{margin:6px 0 22px;color:#8ea0c2;font-size:15px}
+a.btn{
+  display:block;text-align:center;text-decoration:none;color:#fff;
+  background:#3d6bff;border-radius:14px;padding:16px 14px;font-size:18px;font-weight:700;
+}
+a.btn:active{opacity:.85}
+.hint{margin:14px 0 0;color:#c5d2ea;font-size:14px}
+.urlbox{margin-top:22px;background:#152038;border:1px solid #2a3b5e;border-radius:12px;padding:12px}
+.urlbox p{margin:0 0 6px;color:#8ea0c2;font-size:13px}
+#jsonurl{margin:0;word-break:break-all;font-size:13px;color:#d5e2ff}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="badge">安卓 sing-box</div>
+  <h1>LA-154</h1>
+  <p class="host">154.36.173.212 : 34609</p>
+  <a class="btn" id="go" href="#">打开 sing-box 并导入</a>
+  <p class="hint">没跳出微信时：右上角 <b>···</b> → <b>在浏览器打开</b>，再点一次上面的按钮。</p>
+  <div class="urlbox">
+    <p>远程配置地址。按钮没反应时，在 sing-box 里新建远程配置，粘贴这一行。</p>
+    <p id="jsonurl"></p>
+  </div>
+</div>
+<script>
+(function () {
+  var path = location.pathname || "/";
+  if (/index\.html$/.test(path)) path = path.replace(/index\.html$/, "");
+  else if (path.slice(-1) !== "/") path += "/";
+  var jsonUrl = location.origin + path + "la-154.json";
+  var scheme = "sing-box://import-remote-profile?url=" + encodeURIComponent(jsonUrl) + "#" + encodeURIComponent("LA-154");
+  var btn = document.getElementById("go");
+  btn.href = scheme;
+  btn.addEventListener("click", function () { location.href = scheme; });
+  document.getElementById("jsonurl").textContent = jsonUrl;
+})();
+</script>
+</body>
+</html>
